@@ -73,8 +73,11 @@
                     <button type="submit" class="btn btn-success my-4">Sign in</button>
                   </div>
                 </form>
-                  {% if val %}
-				<div class="row bg-dark" style="height:2vh; color:white">You already booked the slot.</div>
+                  {% if val == '0' %}
+				<div class="row bg-dark" style="height:2vh; color:white">Enter correct receipt id.</div>
+                  {% elif val == '1' %}
+                    <div class="row bg-dark" style="height:2vh; color:white">You booked the slot.</div>
+
                   {% endif %}
               </div>
             </div>

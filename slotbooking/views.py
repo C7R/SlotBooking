@@ -1,8 +1,7 @@
 from django.http import HttpResponse,Http404
 from django.shortcuts import render
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
-from .models import Player
+from .models import *
 import requests
 
 # Create your views here.
@@ -18,7 +17,7 @@ def index(request):
         c1 = rno.split('-')
         print(c1[0])
         if c1[0] != 'CRED18':
-            val = True
+            val = '0'
             return render(request, 'Login.html', {'val': val})
 
         r = requests.post('http://app.credenz.info/retrive/getKey.php', json={"uniKey": rno}).json()
@@ -43,25 +42,85 @@ def index(request):
                 login(request, u2)
 
                 ob = user.player
+                #slots = SlotCapacity.objects.all()
+
                 context = {'clash ': ob.clash, 'rc': ob.rc}
+
+
                 return render(request,'Slotselection.html', context)
+
             else:
                 user = request.user
                 pobj = user.Player
                 if pobj.booked:
-                    val = True
+                    val = 1
                     return render(request, 'Login.html', {'val': val})
                 else:
                     context = {'clash ': pobj.clash, 'rc': pobj.rc}
                     return render(request, 'Slotselection.html', context)
         else:
-            val = True
+            val = 0
             context = {'val': val}
             return render(request, 'Login.html', context)
     else:
         return render(request, 'Login.html')
 
 
-def books(requst):
-    if requst.method == 'POST':
-        pass
+def slotpage(request):
+    clash = 0
+    rc = 0
+    slot = Slot.objects.all()
+    context = {
+        'clash': bool(clash),
+        'rc': bool(rc),
+        'slot': slot
+    }
+    return render(request, "ss.html", context)
+
+
+def getSlotInput(request):
+
+    if request.method == 'POST' and request.user.is_authenticated():
+
+        clash = 0
+        rc = 0
+        clashslot = None
+        rcslot = None
+
+        if clash == 1:
+            clashslot  = request.post['clash']
+            slot = Slot.objects.filter(id=clashslot)
+            slot.count -= 1
+            slot.save()
+            u = request.user.player
+            u.cslot = slot
+            u.booked = True
+            u.save()
+
+
+        if rc == 1:
+            rcslot = request.post['rc']
+            slot = Slot.objects.filter(id=rcslot)
+            slot.count -= 1
+            slot.save()
+            u = request.user.player
+            u.rslot = slot
+            u.booked = True
+            u.save()
+
+
+        return logoutr(request)
+
+
+            #return render(request, "ss.html", context)
+
+    else:
+
+        return render(request, 'login.html')
+
+
+def logoutr(request):
+
+    logout(request)
+
+    return HttpResponse("<h1>You successfully booked the slot</h1>")

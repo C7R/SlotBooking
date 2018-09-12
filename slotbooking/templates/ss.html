@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>SLOT SELECTION</title>
+
+    <style>	
+		body{
+			background-image: linear-gradient(to top, #6a85b6 0%, #bac8e0 100%);
+		}
+		.touch{
+
+		style=background-color:black;
+		opacity:0.1;
+
+		}
+
+
+
+</style>
+  </head>
+
+
+
+  <body>
+        <nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">
+    SLOT SELECTION
+  </a>
+</nav>
+
+                <div class="container-fluid " >
+                	<form action="/slot/books" method="post">
+
+                     <div class="row">
+					 <div class="col-12">
+					 <div class="card " style="background-color: transparent;">
+  <div class="card-header text-center">
+    <h2>INSTRUCTIONS</h2>
+  </div>
+  <!--<div class="card-body" style="background-color: rgba(255,255,255,0.3)">-->
+    <!---->
+    <!--<p class="card-text ">-->
+	<!--<ul>-->
+	<!--<li>CLASH and REVERSE CODING <b>1st Round</b> will be held on <b>21st September'18 Friday</b> and <b>22nd September'18 Saturday.</b></li>-->
+	<!--<br><li> Participant have to select one of the Time Slot from either of the days.</li>-->
+	<!--<br><li>Once the time slot is selected, it will not be changed.</li>-->
+	<!--</ul>-->
+	<!--</p>-->
+    <!---->
+  <!--</div>-->
+
+</div>
+					 </div>
+
+                    <div class="col-lg-6 ">
+
+								<div class="card text-center " style="background-color: transparent;">
+  									<div class="card-header" style="height:5vh;">
+    									<h2>CLASH</h2>
+  									</div>
+									<div class="row">
+									<div class="input-group my-1" style="width:22vw; margin-left:2vw;">
+
+ 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="Friday 21st September" readonly>
+									</div>
+									<div class="input-group my-1" style="width:22vw; margin-left:2vw;">
+  										<div class="input-group-prepend">
+
+  										</div>
+ 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="Saturday 22nd September" readonly>
+									</div>
+										</div>
+  								<div class="card-body row align-items-center" style="background-color: rgba(255,255,255,0.3); margin-top:-0.8vh;">
+                                    {% if clash %}
+
+    									<div class="col-lg-6 order-2 order-md-1 order-lg-1 ">
+
+											{% for i in slot %}
+											{% if i.day == 0 and i.flag == 0 %}
+											{% if i.count == 0 %}
+    								<div class="input-group my-1">
+  										<div class="input-group-prepend">
+    											<div class="input-group-text">
+   												 <input type="radio" name="clash" aria-label="Radio button for following text input "  value={{i.id}} disabled >
+    											</div>
+  										</div>
+ 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="{{i.time}}"  readonly><span class="form-control text-center touch">{{i.count}}</span>
+									</div>
+                                            {% else %}
+
+                                            <div class="input-group my-1">
+  										<div class="input-group-prepend">
+    											<div class="input-group-text">
+   												 <input type="radio" name="clash" aria-label="Radio button for following text input"  value={{i.id}} >
+    											</div>
+  										</div>
+ 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="{{i.time}}"  readonly><span class="form-control text-center ">{{i.count}}</span>
+									</div>
+                                            {% endif %}
+											{% endif %}
+									{% endfor %}
+										</div>
+										<div class="col-lg-6 my-5 order-1 order-md-2 order-lg-2">
+                                            {% for i in slot %}
+											{% if i.day == 1 and i.flag == 0 %}
+										{% if i.count == 0 %}
+    								<div class="input-group my-1">
+  										<div class="input-group-prepend">
+    											<div class="input-group-text">
+   												 <input type="radio" name="clash" aria-label="Radio button for following text input"  value={{i.id}} disabled >
+    											</div>
+  										</div>
+ 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="{{i.time}}"  readonly><span class="form-control text-center touch">{{i.count}}</span>
+									</div>
+                                            {% else %}
+
+                                            <div class="input-group my-1">
+  										<div class="input-group-prepend">
+    											<div class="input-group-text">
+   												 <input type="radio" name="clash" aria-label="Radio button for following text input"  value={{i.id}} >
+    											</div>
+  										</div>
+ 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="{{i.time}}"  readonly><span class="form-control text-center">{{i.count}}</span>
+									</div>
+                                            {% endif %}
+                                            		{% endif %}
+									                {% endfor %}
+
+										</div>
+                                    {% else %}
+                                <div class="col-lg-6 order-2 order-md-1 order-lg-1 ">
+
+											{% for i in slot %}
+											{% if i.day == 0 and i.flag == 0 %}
+
+    								<div class="input-group my-1">
+  										<div class="input-group-prepend">
+    											<div class="input-group-text">
+   												 <input type="radio" name="clash" aria-label="Radio button for following text input"  value={{i.id}} disabled >
+    											</div>
+  										</div>
+ 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="{{i.time}}"  readonly><span class="form-control text-center touch">{{i.count}}</span>
+									</div>
+											{% endif %}
+									{% endfor %}
+										</div>
+										<div class="col-lg-6 my-5 order-1 order-md-2 order-lg-2">
+                                            {% for i in slot %}
+											{% if i.day == 1 and i.flag == 0 %}
+										<div class="input-group my-1">
+  										<div class="input-group-prepend">
+    											<div class="input-group-text">
+   												 <input type="radio" name="clash" aria-label="Radio button for following text input"  value=value={{i.id}} disabled>
+    											</div>
+  										</div>
+ 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="{{i.time}}" readonly><span class="form-control text-center touch">{{i.count}}</span>
+
+                                        </div>
+                                            		{% endif %}
+									                {% endfor %}
+
+										</div>
+                                    {% endif %}
+
+  								</div>
+
+
+
+								</div>
+
+                    </div>
+
+                     <div class="col-lg-6 ">
+
+                         <div class="card text-center " style="background-color: transparent;">
+  									<div class="card-header" style="height:5vh;">
+    									<h2>REVERSE CODING</h2>
+  									</div>
+									<div class="row">
+									<div class="input-group my-1" style="width:22vw; margin-left:2vw;">
+
+ 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="Friday 21st September" readonly>
+									</div>
+									<div class="input-group my-1" style="width:22vw; margin-left:2vw;">
+  										<div class="input-group-prepend">
+
+  										</div>
+ 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="Saturday 22nd September" readonly>
+									</div>
+										</div>
+  								<div class="card-body row align-items-center" style="background-color: rgba(255,255,255,0.3); margin-top:-0.8vh;">
+    									{% if rc %}
+
+    									<div class="col-lg-6 order-2 order-md-1 order-lg-1 ">
+
+											{% for i in slot %}
+											{% if i.day == 0 and i.flag == 1 %}
+                                            {% if i.count == 0  %}
+    								<div class="input-group my-1" >
+  										<div class="input-group-prepend">
+    											<div class="input-group-text">
+   												 <input type="radio" name="rc" aria-label="Radio button for following text input"  value={{i.id}} disabled style="color:red">
+    											</div>
+  										</div>
+ 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="{{i.time}}"  readonly><span class="form-control text-center touch">{{i.count}}</span>
+									</div>
+                                            {% else %}
+
+                                            <div class="input-group my-1">
+  										<div class="input-group-prepend">
+    											<div class="input-group-text">
+   												 <input type="radio" name="rc" aria-label="Radio button for following text input"  value={{i.id}}  >
+    											</div>
+  										</div>
+ 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="{{i.time}}"  readonly><span class="form-control text-center">{{i.count}}</span>
+									</div>
+                                            {% endif %}
+											{% endif %}
+									{% endfor %}
+										</div>
+										<div class="col-lg-6 my-5 order-1 order-md-2 order-lg-2">
+                                            {% for i in slot %}
+											{% if i.day == 1 and i.flag == 1 %}
+										{% if i.count == 0  %}
+    								<div class="input-group my-1">
+  										<div class="input-group-prepend">
+    											<div class="input-group-text">
+   												 <input type="radio" name="rc" aria-label="Radio button for following text input"  value={{i.id}} disabled >
+    											</div>
+  										</div>
+ 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="{{i.time}}"  readonly><span class="form-control text-center touch">{{i.count}}</span>
+									</div>
+                                            {% else %}
+
+                                            <div class="input-group my-1">
+  										<div class="input-group-prepend">
+    											<div class="input-group-text">
+   												 <input type="radio" name="rc" aria-label="Radio button for following text input"  value={{i.id}}  >
+    											</div>
+  										</div>
+ 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="{{i.time}}"  readonly><span class="form-control text-center">{{i.count}}</span>
+									</div>
+                                            {% endif %}
+                                            		{% endif %}
+									                {% endfor %}
+
+										</div>
+                                    {% else %}
+                                <div class="col-lg-6 order-2 order-md-1 order-lg-1 ">
+
+											{% for i in slot %}
+											{% if i.day == 0 and i.flag == 1 %}
+    								<div class="input-group my-1">
+  										<div class="input-group-prepend">
+    											<div class="input-group-text">
+   												 <input type="radio" name="rc" aria-label="Radio button for following text input"  value={{i.id}} disabled  >
+    											</div>
+  										</div>
+ 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="{{i.time}}"  readonly><span class="form-control text-center touch" >{{i.count}}</span>
+									</div>
+											{% endif %}
+									{% endfor %}
+										</div>
+										<div class="col-lg-6 my-5 order-1 order-md-2 order-lg-2">
+                                            {% for i in slot %}
+											{% if i.day == 1 and i.flag == 1 %}
+										<div class="input-group my-1">
+  										<div class="input-group-prepend">
+    											<div class="input-group-text">
+   												 <input type="radio" name="rc" aria-label="Radio button for following text input"  value=value={{i.id}} disabled>
+    											</div>
+  										</div>
+ 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="{{i.time}}" readonly><span class="form-control text-center touch"  >{{i.count}}</span>
+
+                                        </div>
+                                            		{% endif %}
+									                {% endfor %}
+
+										</div>
+                                    {% endif %}
+
+                        
+                    </div>
+             
+             
+                    </div>
+
+                    <div class="d-flex justify-content-center mt-3"> <button type="submit"  class="btn btn-lg btn-success" style="position:relative;right:50vh;" >Submit</button>	</div>
+
+                     </div>
+                     </div>
+                    </form>
+                </div>
+        
+        
+       
+  
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="./node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script src="./node_modules/popper.js/dist/popper.min.js" ></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="./js/style.js"></script>
+  </body>
+</html>

@@ -17,9 +17,38 @@
 
 		style=background-color:black;
 		opacity:0.1;
-
+    width: 5vh;
 		}
-
+    @media only screen and (max-width:376px)
+    {
+        .lol
+      {
+        transform: translate(20vw,-95vh);
+      }
+      .lolwa
+      {
+        transform: translate(20vw,90vh);
+      }
+      .hihi
+      {
+        transform: translateX(70vw);
+      }
+    }
+    @media only screen and (max-width:415px) and (min-width: 377px)
+    {
+      .lol
+      {
+        transform: translate(20vw,-85vh);
+      }
+      .lolwa
+      {
+        transform: translate(20vw,75vh);
+      }
+      .hihi
+      {
+        transform: translateX(70vw);
+      }
+    }
 
 
 </style>
@@ -35,25 +64,15 @@
 </nav>
 
                 <div class="container-fluid " >
-                	<form action="/slot/books" method="post">
-
+                	<form action="/login/books/" method="post">
+                      {% csrf_token %}
                      <div class="row">
 					 <div class="col-12">
 					 <div class="card " style="background-color: transparent;">
   <div class="card-header text-center">
     <h2>INSTRUCTIONS</h2>
   </div>
-  <!--<div class="card-body" style="background-color: rgba(255,255,255,0.3)">-->
-    <!---->
-    <!--<p class="card-text ">-->
-	<!--<ul>-->
-	<!--<li>CLASH and REVERSE CODING <b>1st Round</b> will be held on <b>21st September'18 Friday</b> and <b>22nd September'18 Saturday.</b></li>-->
-	<!--<br><li> Participant have to select one of the Time Slot from either of the days.</li>-->
-	<!--<br><li>Once the time slot is selected, it will not be changed.</li>-->
-	<!--</ul>-->
-	<!--</p>-->
-    <!---->
-  <!--</div>-->
+
 
 </div>
 					 </div>
@@ -64,23 +83,15 @@
   									<div class="card-header" style="height:5vh;">
     									<h2>CLASH</h2>
   									</div>
-									<div class="row">
-									<div class="input-group my-1" style="width:22vw; margin-left:2vw;">
-
- 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="Friday 21st September" readonly>
-									</div>
-									<div class="input-group my-1" style="width:22vw; margin-left:2vw;">
-  										<div class="input-group-prepend">
-
-  										</div>
- 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="Saturday 22nd September" readonly>
-									</div>
-										</div>
+									
   								<div class="card-body row align-items-center" style="background-color: rgba(255,255,255,0.3); margin-top:-0.8vh;">
                                     {% if clash %}
 
     									<div class="col-lg-6 order-2 order-md-1 order-lg-1 ">
+                        <div class="input-group my-1" style="width:22vw; margin-left:2vw;">
 
+                         <input type="text" class="form-control text-center lol" aria-label="Text input with radio button" value="Friday 21st September" readonly style="width: auto;position: relative;right: 4vh;">
+                  </div>
 											{% for i in slot %}
 											{% if i.day == 0 and i.flag == 0 %}
 											{% if i.count == 0 %}
@@ -90,14 +101,14 @@
    												 <input type="radio" name="clash" aria-label="Radio button for following text input "  value={{i.id}} disabled >
     											</div>
   										</div>
- 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="{{i.time}}"  readonly><span class="form-control text-center touch">{{i.count}}</span>
+ 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="{{i.time}}"  readonly><span class="text-center touch">{{i.count}}</span>
 									</div>
                                             {% else %}
 
                                             <div class="input-group my-1">
   										<div class="input-group-prepend">
     											<div class="input-group-text">
-   												 <input type="radio" name="clash" aria-label="Radio button for following text input"  value={{i.id}} >
+   												 <input type="radio" name="clash" aria-label="Radio button for following text input"  value={{i.id}} required >
     											</div>
   										</div>
  												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="{{i.time}}"  readonly><span class="form-control text-center ">{{i.count}}</span>
@@ -107,6 +118,12 @@
 									{% endfor %}
 										</div>
 										<div class="col-lg-6 my-5 order-1 order-md-2 order-lg-2">
+                      <div class="input-group my-1" style="width:22vw; margin-left:2vw;">
+                      <div class="input-group-prepend">
+
+                      </div>
+                         <input type="text" class="form-control text-center lolwa" aria-label="Text input with radio button" value="Saturday 22nd September" style="width: auto;position: relative;right: 4vh;"readonly>
+                  </div>
                                             {% for i in slot %}
 											{% if i.day == 1 and i.flag == 0 %}
 										{% if i.count == 0 %}
@@ -123,7 +140,7 @@
                                             <div class="input-group my-1">
   										<div class="input-group-prepend">
     											<div class="input-group-text">
-   												 <input type="radio" name="clash" aria-label="Radio button for following text input"  value={{i.id}} >
+   												 <input type="radio" name="clash" aria-label="Radio button for following text input"  value={{i.id}} required="">
     											</div>
   										</div>
  												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="{{i.time}}"  readonly><span class="form-control text-center">{{i.count}}</span>
@@ -135,7 +152,10 @@
 										</div>
                                     {% else %}
                                 <div class="col-lg-6 order-2 order-md-1 order-lg-1 ">
+                                  <div class="input-group my-1" style="width:22vw; margin-left:2vw;">
 
+                         <input type="text" class="form-control text-center lol" aria-label="Text input with radio button" value="Friday 21st September" readonly style="width: auto;position: relative;right: 4vh;">
+                  </div>
 											{% for i in slot %}
 											{% if i.day == 0 and i.flag == 0 %}
 
@@ -151,6 +171,12 @@
 									{% endfor %}
 										</div>
 										<div class="col-lg-6 my-5 order-1 order-md-2 order-lg-2">
+                      <div class="input-group my-1" style="width:22vw; margin-left:2vw;">
+                      <div class="input-group-prepend">
+
+                      </div>
+                         <input type="text" class="form-control text-center lolwa" aria-label="Text input with radio button" value="Saturday 22nd September" style="width: auto;position: relative;right: 4vh;" readonly>
+                  </div>
                                             {% for i in slot %}
 											{% if i.day == 1 and i.flag == 0 %}
 										<div class="input-group my-1">
@@ -182,23 +208,15 @@
   									<div class="card-header" style="height:5vh;">
     									<h2>REVERSE CODING</h2>
   									</div>
-									<div class="row">
-									<div class="input-group my-1" style="width:22vw; margin-left:2vw;">
-
- 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="Friday 21st September" readonly>
-									</div>
-									<div class="input-group my-1" style="width:22vw; margin-left:2vw;">
-  										<div class="input-group-prepend">
-
-  										</div>
- 												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="Saturday 22nd September" readonly>
-									</div>
-										</div>
+									
   								<div class="card-body row align-items-center" style="background-color: rgba(255,255,255,0.3); margin-top:-0.8vh;">
     									{% if rc %}
 
     									<div class="col-lg-6 order-2 order-md-1 order-lg-1 ">
+                        <div class="input-group my-1" style="width:22vw; margin-left:2vw;">
 
+                         <input type="text" class="form-control text-center lol" aria-label="Text input with radio button" value="Friday 21st September" readonly style="width: auto;position: relative;right: 4vh;">
+                  </div>
 											{% for i in slot %}
 											{% if i.day == 0 and i.flag == 1 %}
                                             {% if i.count == 0  %}
@@ -215,7 +233,7 @@
                                             <div class="input-group my-1">
   										<div class="input-group-prepend">
     											<div class="input-group-text">
-   												 <input type="radio" name="rc" aria-label="Radio button for following text input"  value={{i.id}}  >
+   												 <input type="radio" name="rc" aria-label="Radio button for following text input"  value={{i.id}}  required>
     											</div>
   										</div>
  												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="{{i.time}}"  readonly><span class="form-control text-center">{{i.count}}</span>
@@ -225,6 +243,10 @@
 									{% endfor %}
 										</div>
 										<div class="col-lg-6 my-5 order-1 order-md-2 order-lg-2">
+                      <div class="input-group my-1" style="width:22vw; margin-left:2vw;">
+
+                         <input type="text" class="form-control text-center lolwa" aria-label="Text input with radio button" value="Saturday 22nd September" readonly style="width: auto;position: relative;right: 4vh;">
+                  </div>
                                             {% for i in slot %}
 											{% if i.day == 1 and i.flag == 1 %}
 										{% if i.count == 0  %}
@@ -241,7 +263,7 @@
                                             <div class="input-group my-1">
   										<div class="input-group-prepend">
     											<div class="input-group-text">
-   												 <input type="radio" name="rc" aria-label="Radio button for following text input"  value={{i.id}}  >
+   												 <input type="radio" name="rc" aria-label="Radio button for following text input"  value={{i.id}}  required>
     											</div>
   										</div>
  												 <input type="text" class="form-control text-center" aria-label="Text input with radio button" value="{{i.time}}"  readonly><span class="form-control text-center">{{i.count}}</span>
@@ -253,7 +275,10 @@
 										</div>
                                     {% else %}
                                 <div class="col-lg-6 order-2 order-md-1 order-lg-1 ">
+                                  <div class="input-group my-1" style="width:22vw; margin-left:2vw;">
 
+                         <input type="text" class="form-control text-center lol" aria-label="Text input with radio button" value="Friday 21st September" readonly style="width: auto;position: relative;right: 4vh;">
+                  </div>
 											{% for i in slot %}
 											{% if i.day == 0 and i.flag == 1 %}
     								<div class="input-group my-1">
@@ -268,6 +293,10 @@
 									{% endfor %}
 										</div>
 										<div class="col-lg-6 my-5 order-1 order-md-2 order-lg-2">
+                      <div class="input-group my-1" style="width:22vw; margin-left:2vw;">
+
+                         <input type="text" class="form-control text-center lolwa" aria-label="Text input with radio button" value="Saturday 22nd September" readonly style="width: auto;position: relative;right: 4vh;">
+                  </div>
                                             {% for i in slot %}
 											{% if i.day == 1 and i.flag == 1 %}
 										<div class="input-group my-1">
@@ -291,7 +320,7 @@
              
                     </div>
 
-                    <div class="d-flex justify-content-center mt-3"> <button type="submit"  class="btn btn-lg btn-success" style="position:relative;right:50vh;" >Submit</button>	</div>
+                    <div class="d-flex justify-content-center mt-3 hihi"> <button type="submit"  class="btn btn-lg btn-success" style="position:relative;right:50vh;" >Submit</button>	</div>
 
                      </div>
                      </div>
@@ -305,9 +334,6 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="./node_modules/jquery/dist/jquery.slim.min.js"></script>
-    <script src="./node_modules/popper.js/dist/popper.min.js" ></script>
-    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="./js/style.js"></script>
+   
   </body>
 </html>

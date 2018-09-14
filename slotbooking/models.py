@@ -23,8 +23,8 @@ class Player(models.Model):
     clash = models.BooleanField(default=0)
     rc = models.BooleanField(default=0)
     booked = models.BooleanField(default=0)
-    cslot = models.ForeignKey(Slot, related_name='clash', on_delete=models.CASCADE)
-    rslot = models.ForeignKey(Slot,related_name='rc', on_delete=models.CASCADE)
+    cslot = models.ForeignKey(Slot, related_name='clash', on_delete=models.CASCADE, null=True)
+    rslot = models.ForeignKey(Slot,related_name='rc', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         a = self.receiptno

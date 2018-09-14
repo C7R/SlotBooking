@@ -25,11 +25,6 @@
     <div class="container-fluid" >
       
             
-            
-            
-            
-           
-            
              <main>
     <section class="d-flex align-items-center" style="height:93vh;">
       
@@ -65,7 +60,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"></span>
                       </div>
-                      <input class="form-control" placeholder="Reciept Number" name="r1" type="text">
+                      <input class="form-control" placeholder="Reciept Number" name="r1" type="text" pattern="CRED18-[0-9]{1,15}-[A-Z]{3}" title="Reciept Number Not Valid, Note that it is Case Sensitive">
                     </div>
                   </div>
                   
@@ -73,11 +68,13 @@
                     <button type="submit" class="btn btn-success my-4">Sign in</button>
                   </div>
                 </form>
-                  {% if val == '0' %}
-				<div class="row bg-dark" style="height:2vh; color:white">Enter correct receipt id.</div>
-                  {% elif val == '1' %}
-                    <div class="row bg-dark" style="height:2vh; color:white">You booked the slot.</div>
-
+                  {% if val == 0 %}
+				<div class="row bg-dark text-center"  style="height:3vh; color:white;font-weight: 10px;">Enter correct Receipt id</div>
+                  {% elif val == 1 %}
+                    <div class="row bg-dark text-center" style="height:3vh;color:white;font-weight: 10px;">You already booked the Slot</div>
+                  {% else %}
+                    <div class="row bg-dark text-center" style="height:7vh;color:white;font-weight: 10px;"><p>Slot once booked will not be changed.<br>
+                              Slot capacity for Clash is 40 and for Reverse Coding is 30.</p></div>
                   {% endif %}
               </div>
             </div>
@@ -98,9 +95,6 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="./node_modules/jquery/dist/jquery.slim.min.js"></script>
-    <script src="./node_modules/popper.js/dist/popper.min.js" ></script>
-    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="./js/style.js"></script>
+    
   </body>
 </html>
